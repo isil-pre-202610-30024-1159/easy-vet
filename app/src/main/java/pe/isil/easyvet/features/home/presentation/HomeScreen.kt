@@ -23,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,23 +37,23 @@ fun HomeScreen() {
     val products = listOf(
         Product(
             id = 1,
-            name = "Dog Food",
-            description = "High quality dog food",
-            image = "dog_food.png",
+            name = "Royal Canin Maxi Puppy",
+            description = "Dry food for large breed puppies. Supports bone growth and digestive health.",
+            image = "https://i.imgur.com/WkZEOU6.png",
             price = 29.99
         ),
         Product(
             id = 2,
-            name = "Cat Toy",
-            description = "Fun toy for cats",
-            image = "cat_toy.png",
+            name = "Eukanuba Active Adult",
+            description = "Complete nutrition with high-quality proteins for active adult dogs.",
+            image = "https://i.imgur.com/guSk1sh.png",
             price = 9.99
         ),
         Product(
             id = 3,
-            name = "Bird Cage",
-            description = "Spacious cage for birds",
-            image = "bird_cage.png",
+            name = "Whiskas Adult Chicken Flavor",
+            description = "Crunchy kibbles with chicken flavor for adult cats. Rich in vitamins and minerals.",
+            image = "https://i.imgur.com/dRC9dEB.png",
             price = 49.99
         )
     )
@@ -71,8 +72,9 @@ fun HomeScreen() {
                 IconButton(
                     onClick = {},
                     modifier = Modifier
-                        .clip(CircleShape)
+                        .shadow(4.dp, CircleShape)
                         .background(MaterialTheme.colorScheme.onPrimary)
+
 
                 ) {
                     Icon(

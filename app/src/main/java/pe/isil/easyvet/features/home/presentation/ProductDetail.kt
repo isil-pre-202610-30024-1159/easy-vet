@@ -1,0 +1,198 @@
+package pe.isil.easyvet.features.home.presentation
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
+import pe.isil.easyvet.R
+import pe.isil.easyvet.core.ui.theme.AppTheme
+import pe.isil.easyvet.features.home.domain.model.Product
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ProductDetail(product: Product) {
+
+    var showBottomSheet by remember { mutableStateOf(false) }
+
+    val sheetState = rememberModalBottomSheetState(
+        skipPartiallyExpanded = false,
+    )
+
+    val quantity = remember {
+        mutableStateOf(0)
+    }
+
+    Scaffold(
+        floatingActionButton = {
+            Button(
+                onClick = {
+                    showBottomSheet = true
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+            ) {
+                Text(text = "Add to cart")
+            }
+        },
+        floatingActionButtonPosition = FabPosition.Center
+    ) { paddingValues ->
+        Column(modifier = Modifier.padding(paddingValues)) {
+            AsyncImage(
+                model = product.image,
+                contentDescription = product.name,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(320.dp)
+            )
+            Text(
+                text = product.name,
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier.padding(8.dp)
+            )
+            Row(
+                modifier = Modifier.padding(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "$ ${product.price}",
+                    style = MaterialTheme.typography.titleLarge,
+                )
+
+                Spacer(modifier = Modifier.weight(1f))
+                IconButton(
+                    enabled = quantity.value > 0,
+                    onClick = {
+                        quantity.value -= 1
+
+                    },
+                    modifier = Modifier
+                        .shadow(4.dp, CircleShape)
+                        .background(MaterialTheme.colorScheme.onPrimary)
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.remove),
+                        contentDescription = "remove"
+                    )
+                }
+
+                Text(
+                    text = "${quantity.value}",
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier.width(32.dp),
+                    textAlign = TextAlign.Center
+
+                )
+                IconButton(
+                    onClick = {
+                        quantity.value += 1
+                    },
+                    modifier = Modifier
+                        .shadow(4.dp, CircleShape)
+                        .background(MaterialTheme.colorScheme.onPrimary)
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.add),
+                        contentDescription = "remove"
+                    )
+                }
+            }
+            if (showBottomSheet) {
+                ModalBottomSheet(
+                    sheetState = sheetState,
+                    onDismissRequest = {
+                        showBottomSheet = false
+                    }
+                ) {
+                    Column {
+
+                        Text(
+                            text = " ADDED TO CART",
+                            style = MaterialTheme.typography.headlineSmall,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                        Row {
+                            AsyncImage(
+                                model = product.image,
+                                contentDescription = product.name,
+                                modifier = Modifier.height(96.dp),
+                                contentScale = ContentScale.Fit
+                            )
+
+                            Column {
+                                Text(text = product.name)
+                                Text(text = "$ ${product.price}")
+
+                            }
+
+                        }
+                        Button(
+                            onClick = {
+                            },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp)
+                        ) {
+                            Text(text = "View cart")
+                        }
+                    }
+
+                }
+            }
+
+        }
+
+    }
+
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun ProductDetailPreview() {
+    AppTheme {
+        ProductDetail(
+            Product(
+                id = 3,
+                name = "Whiskas Adult Chicken Flavor",
+                description = "Crunchy kibbles with chicken flavor for adult cats. Rich in vitamins and minerals.",
+                image = "https://i.imgur.com/dRC9dEB.png",
+                price = 49.99
+            )
+        )
+    }
+}
