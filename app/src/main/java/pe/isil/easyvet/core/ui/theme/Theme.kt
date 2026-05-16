@@ -88,18 +88,6 @@ private val darkScheme = darkColorScheme(
 )
 
 
-@Immutable
-data class ColorFamily(
-    val color: Color,
-    val onColor: Color,
-    val colorContainer: Color,
-    val onColorContainer: Color
-)
-
-val unspecified_scheme = ColorFamily(
-    Color.Unspecified, Color.Unspecified, Color.Unspecified, Color.Unspecified
-)
-
 @Composable
 fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),

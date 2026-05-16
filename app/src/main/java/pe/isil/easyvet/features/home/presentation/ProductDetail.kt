@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
@@ -78,15 +79,20 @@ fun ProductDetail(product: Product) {
                     .fillMaxWidth()
                     .height(320.dp)
             )
+            Spacer(modifier = Modifier.height(16.dp))
+
             Text(
                 text = product.name,
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.SemiBold,
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(horizontal = 16.dp)
             )
+            Spacer(modifier = Modifier.height(8.dp))
+
             Row(
-                modifier = Modifier.padding(8.dp),
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
             ) {
                 Text(
                     text = "$ ${product.price}",
@@ -102,6 +108,7 @@ fun ProductDetail(product: Product) {
                     },
                     modifier = Modifier
                         .shadow(4.dp, CircleShape)
+                        .size(32.dp)
                         .background(MaterialTheme.colorScheme.onPrimary)
                 ) {
                     Icon(
@@ -112,7 +119,7 @@ fun ProductDetail(product: Product) {
 
                 Text(
                     text = "${quantity.value}",
-                    style = MaterialTheme.typography.titleLarge,
+                    style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.width(32.dp),
                     textAlign = TextAlign.Center
 
@@ -123,6 +130,7 @@ fun ProductDetail(product: Product) {
                     },
                     modifier = Modifier
                         .shadow(4.dp, CircleShape)
+                        .size(32.dp)
                         .background(MaterialTheme.colorScheme.onPrimary)
                 ) {
                     Icon(
@@ -131,21 +139,35 @@ fun ProductDetail(product: Product) {
                     )
                 }
             }
+
+            Spacer(modifier = Modifier.height(32.dp))
+            Text(
+                text = product.description,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
+
             if (showBottomSheet) {
                 ModalBottomSheet(
+
                     sheetState = sheetState,
                     onDismissRequest = {
                         showBottomSheet = false
-                    }
+                    },
+                    containerColor = MaterialTheme.colorScheme.onPrimary
                 ) {
                     Column {
 
                         Text(
                             text = " ADDED TO CART",
                             style = MaterialTheme.typography.headlineSmall,
-                            fontWeight = FontWeight.SemiBold
+                            fontWeight = FontWeight.SemiBold,
+                            modifier = Modifier.padding(horizontal = 8.dp)
                         )
-                        Row {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(8.dp)
+                        ) {
                             AsyncImage(
                                 model = product.image,
                                 contentDescription = product.name,
@@ -154,7 +176,7 @@ fun ProductDetail(product: Product) {
                             )
 
                             Column {
-                                Text(text = product.name)
+                                Text(text = product.name, fontWeight = FontWeight.SemiBold)
                                 Text(text = "$ ${product.price}")
 
                             }
@@ -162,6 +184,7 @@ fun ProductDetail(product: Product) {
                         }
                         Button(
                             onClick = {
+                                showBottomSheet = false
                             },
                             modifier = Modifier
                                 .fillMaxWidth()
