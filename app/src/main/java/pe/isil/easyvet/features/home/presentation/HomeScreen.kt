@@ -26,7 +26,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import pe.isil.easyvet.R
 import pe.isil.easyvet.core.ui.theme.AppTheme
-import pe.isil.easyvet.features.home.domain.model.Product
 
 @Composable
 fun HomeScreen(viewModel: HomeViewModel = viewModel() ) {
