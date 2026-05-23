@@ -11,29 +11,27 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import pe.isil.easyvet.R
 import pe.isil.easyvet.core.ui.theme.AppTheme
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(viewModel: LoginViewModel = viewModel()) {
 
-    val email = remember {
-        mutableStateOf("")
-    }
+    val state by viewModel.uiState.collectAsState()
 
-    val password = remember {
-        mutableStateOf("")
-    }
-
-    val isPasswordVisible = remember {
+    val isPasswordVisible = rememberSaveable {
         mutableStateOf(false)
     }
 
@@ -43,9 +41,9 @@ fun LoginScreen() {
     ) {
 
         OutlinedTextField(
-            value = email.value,
+            value = state.email,
             onValueChange = {
-                email.value = it
+                viewModel.onEmailChanged(it)
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -58,9 +56,9 @@ fun LoginScreen() {
 
 
         OutlinedTextField(
-            value = password.value,
+            value = state.password,
             onValueChange = {
-                password.value = it
+                viewModel.onPasswordChanged(it)
             },
             modifier = Modifier
                 .fillMaxWidth()

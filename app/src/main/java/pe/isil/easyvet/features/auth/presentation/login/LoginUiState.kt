@@ -1,0 +1,6 @@
+package pe.isil.easyvet.features.auth.presentation.login
+
+data class LoginUiState(
+    val email: String = "",
+    val password: String = ""
+)
