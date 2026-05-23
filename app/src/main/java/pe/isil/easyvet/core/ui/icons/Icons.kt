@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
 
 @Suppress("CheckReturnValue")
-public val favoriteBorder: ImageVector
+val favoriteBorder: ImageVector
     get() {
         if (_favoriteBorder != null) {
             return _favoriteBorder!!
@@ -33,7 +33,7 @@ public val favoriteBorder: ImageVector
                         strokeLineCap = StrokeCap.Butt,
                         strokeLineJoin = StrokeJoin.Bevel,
                         strokeLineMiter = 1f,
-                        pathFillType = PathFillType.Companion.NonZero,
+                        pathFillType = PathFillType.NonZero,
                     ) {
                         moveTo(12f, 21f)
                         lineTo(10.55f, 19.7f)
@@ -86,7 +86,7 @@ private var _favoriteBorder: ImageVector? = null
 
 
 @Suppress("CheckReturnValue")
-public val favoriteFilled: ImageVector
+val favoriteFilled: ImageVector
     get() {
         if (_favoriteFilled != null) {
             return _favoriteFilled!!
@@ -109,7 +109,7 @@ public val favoriteFilled: ImageVector
                         strokeLineCap = StrokeCap.Butt,
                         strokeLineJoin = StrokeJoin.Bevel,
                         strokeLineMiter = 1f,
-                        pathFillType = PathFillType.Companion.NonZero,
+                        pathFillType = PathFillType.NonZero,
                     ) {
                         moveTo(12f, 21f)
                         lineTo(10.55f, 19.7f)
