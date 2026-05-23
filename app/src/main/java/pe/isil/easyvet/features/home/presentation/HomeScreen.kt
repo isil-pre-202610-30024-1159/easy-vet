@@ -15,41 +15,24 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import pe.isil.easyvet.R
 import pe.isil.easyvet.core.ui.theme.AppTheme
 import pe.isil.easyvet.features.home.domain.model.Product
 
 @Composable
-fun HomeScreen() {
-    val products = listOf(
-        Product(
-            id = 1,
-            name = "Royal Canin Maxi Puppy",
-            description = "Dry food for large breed puppies. Supports bone growth and digestive health.",
-            image = "https://i.imgur.com/WkZEOU6.png",
-            price = 29.99
-        ),
-        Product(
-            id = 2,
-            name = "Eukanuba Active Adult",
-            description = "Complete nutrition with high-quality proteins for active adult dogs.",
-            image = "https://i.imgur.com/guSk1sh.png",
-            price = 9.99
-        ),
-        Product(
-            id = 3,
-            name = "Whiskas Adult Chicken Flavor",
-            description = "Crunchy kibbles with chicken flavor for adult cats. Rich in vitamins and minerals.",
-            image = "https://i.imgur.com/dRC9dEB.png",
-            price = 49.99
-        )
-    )
+fun HomeScreen(viewModel: HomeViewModel = viewModel() ) {
+
+    val state by viewModel.uiState.collectAsState()
+
     Scaffold { padding ->
         Column(
             modifier = Modifier
@@ -96,7 +79,7 @@ fun HomeScreen() {
 
             BannerSection()
 
-            ProductList(products)
+            ProductList(state.products)
         }
     }
 
