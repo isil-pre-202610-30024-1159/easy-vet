@@ -1,6 +1,7 @@
 package pe.isil.easyvet.features.home.presentation
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -17,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
@@ -28,7 +31,7 @@ import pe.isil.easyvet.R
 import pe.isil.easyvet.core.ui.theme.AppTheme
 
 @Composable
-fun HomeScreen(viewModel: HomeViewModel = viewModel() ) {
+fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
 
     val state by viewModel.uiState.collectAsState()
 
@@ -78,7 +81,34 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel() ) {
 
             BannerSection()
 
-            ProductList(state.products)
+            when {
+                state.products.isNotEmpty() -> {
+                    ProductList(state.products)
+                }
+
+                state.isLoading -> {
+                    Column(
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        CircularProgressIndicator()
+
+                    }
+                }
+
+                else -> {
+                    Column(
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        Text(text = "No products found")
+
+                    }
+                }
+            }
+
         }
     }
 
