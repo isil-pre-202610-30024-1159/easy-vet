@@ -103,7 +103,7 @@ fun LoginScreen(viewModel: LoginViewModel = viewModel()) {
 @Preview(showBackground = true)
 @Composable
 fun LoginScreenPreview() {
-    AppTheme() {
+    AppTheme {
         LoginScreen()
     }
 
