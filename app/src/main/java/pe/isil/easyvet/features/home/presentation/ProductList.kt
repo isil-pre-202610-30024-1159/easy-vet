@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import pe.isil.easyvet.features.home.domain.model.Product
 
 @Composable
-fun ProductList(products: List<Product>) {
+fun ProductList(products: List<Product>, onProductClick: (Product) -> Unit) {
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
@@ -21,7 +21,9 @@ fun ProductList(products: List<Product>) {
     ) {
 
         items(products) { product ->
-            ProductItem(product = product)
+            ProductItem(product = product) {
+                onProductClick(product)
+            }
         }
     }
 

@@ -25,12 +25,13 @@ import pe.isil.easyvet.core.ui.icons.favoriteFilled
 import pe.isil.easyvet.features.home.domain.model.Product
 
 @Composable
-fun ProductItem(product: Product) {
+fun ProductItem(product: Product, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth(),
         elevation = CardDefaults.cardElevation(4.dp),
-        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.onPrimary)
+        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.onPrimary),
+        onClick = onClick
     ) {
         Column(modifier = Modifier.padding(8.dp)) {
             Box {

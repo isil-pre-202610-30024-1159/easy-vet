@@ -29,88 +29,89 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import pe.isil.easyvet.R
 import pe.isil.easyvet.core.ui.theme.AppTheme
+import pe.isil.easyvet.features.home.domain.model.Product
 
 @Composable
-fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
+fun HomeScreen(viewModel: HomeViewModel = viewModel(), onProductClick: (Product) -> Unit = {}) {
 
     val state by viewModel.uiState.collectAsState()
 
-    Scaffold { padding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-        ) {
-            Row(modifier = Modifier.padding(16.dp)) {
-                Column {
-                    Text("Miraflores", fontWeight = FontWeight.Bold)
-                    Text("Home")
-                }
-                Spacer(modifier = Modifier.weight(1f))
-                IconButton(
-                    onClick = {},
-                    modifier = Modifier
-                        .shadow(4.dp, CircleShape)
-                        .background(MaterialTheme.colorScheme.onPrimary)
-                ) {
-                    Icon(
-                        painter = painterResource(R.drawable.visibility),
-                        contentDescription = null,
-
-                        )
-                }
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Row(modifier = Modifier.padding(16.dp)) {
+            Column {
+                Text("Miraflores", fontWeight = FontWeight.Bold)
+                Text("Home")
             }
-
-            OutlinedTextField(
-                value = "",
-                onValueChange = {},
+            Spacer(modifier = Modifier.weight(1f))
+            IconButton(
+                onClick = {},
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .background(MaterialTheme.colorScheme.onPrimary),
-                leadingIcon = {
-                    Icon(
-                        painter = painterResource(R.drawable.visibility_off),
-                        contentDescription = null
+                    .shadow(4.dp, CircleShape)
+                    .background(MaterialTheme.colorScheme.onPrimary)
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.visibility),
+                    contentDescription = null,
+
                     )
-                },
-                placeholder = {
-                    Text("Search")
-                }
-            )
+            }
+        }
 
-            BannerSection()
+        OutlinedTextField(
+            value = "",
+            onValueChange = {},
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .background(MaterialTheme.colorScheme.onPrimary),
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(R.drawable.visibility_off),
+                    contentDescription = null
+                )
+            },
+            placeholder = {
+                Text("Search")
+            }
+        )
 
-            when {
-                state.products.isNotEmpty() -> {
-                    ProductList(state.products)
-                }
+        BannerSection()
 
-                state.isLoading -> {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        CircularProgressIndicator()
-
-                    }
-                }
-
-                else -> {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        Text(text = "No products found")
-
-                    }
+        when {
+            state.products.isNotEmpty() -> {
+                ProductList(state.products) { product ->
+                    onProductClick(product)
                 }
             }
 
+            state.isLoading -> {
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    CircularProgressIndicator()
+
+                }
+            }
+
+            else -> {
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    Text(text = "No products found")
+
+                }
+            }
         }
+
     }
+
 
 }
 
