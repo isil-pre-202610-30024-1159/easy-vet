@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pe.isil.easyvet.features.home.data.ProductRepositoryImpl
 import pe.isil.easyvet.features.home.domain.repositories.ProductRepository
+import kotlin.time.Duration.Companion.milliseconds
 
 class HomeViewModel(private val repository: ProductRepository = ProductRepositoryImpl()): ViewModel() {
 
@@ -24,7 +25,7 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
         }
 
         viewModelScope.launch {
-            delay(2000)
+            delay(2000.milliseconds)
             _uiState.update {
                 it.copy(
                     products = repository.getProducts(),
