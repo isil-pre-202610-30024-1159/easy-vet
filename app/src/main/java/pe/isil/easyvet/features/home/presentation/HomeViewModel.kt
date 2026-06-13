@@ -2,22 +2,25 @@ package pe.isil.easyvet.features.home.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import pe.isil.easyvet.core.di.RemoteModule.provideProductService
 import pe.isil.easyvet.features.home.data.ProductRepositoryImpl
 import pe.isil.easyvet.features.home.domain.repositories.ProductRepository
-import kotlin.time.Duration.Companion.milliseconds
 
-class HomeViewModel(private val repository: ProductRepository = ProductRepositoryImpl()): ViewModel() {
+class HomeViewModel(
+    private val repository: ProductRepository = ProductRepositoryImpl(
+        provideProductService()
+    )
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeUiState())
 
     val uiState: StateFlow<HomeUiState> = _uiState
 
-        fun getProducts() {
+    fun getProducts() {
         _uiState.update {
             it.copy(
                 isLoading = true
@@ -25,7 +28,6 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
         }
 
         viewModelScope.launch {
-            delay(2000.milliseconds)
             _uiState.update {
                 it.copy(
                     products = repository.getProducts(),
@@ -33,8 +35,6 @@ class HomeViewModel(private val repository: ProductRepository = ProductRepositor
                 )
             }
         }
-
-
 
     }
 

@@ -4,6 +4,6 @@ import pe.isil.easyvet.features.home.domain.model.Product
 
 interface ProductRepository {
 
-    fun getProducts(): List<Product>
+   suspend fun getProducts(): List<Product>
 
 }

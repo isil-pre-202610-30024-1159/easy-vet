@@ -19,6 +19,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -36,6 +37,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import pe.isil.easyvet.R
+import pe.isil.easyvet.core.ui.icons.favoriteBorder
 import pe.isil.easyvet.core.ui.theme.AppTheme
 import pe.isil.easyvet.features.home.domain.model.Product
 
@@ -54,6 +56,21 @@ fun ProductDetail(product: Product) {
     }
 
     Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {},
+                navigationIcon = {
+                    IconButton(
+                        onClick = {  }
+                    ) {
+                        Icon(
+                            favoriteBorder,
+                            contentDescription = "Back"
+                        )
+                    }
+                }
+            )
+        },
         floatingActionButton = {
             Button(
                 onClick = {

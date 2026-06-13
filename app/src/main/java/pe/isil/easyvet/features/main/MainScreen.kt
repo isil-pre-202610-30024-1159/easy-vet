@@ -46,7 +46,7 @@ fun MainScreen() {
                 NavigationBarItem(
                     selected = false,
                     onClick = { },
-                    label = { Text("Home") },
+                    label = { Text("Favorites") },
                     icon = {
                         Icon(favoriteBorder, contentDescription = null)
                     }
