@@ -46,7 +46,7 @@ class HomeViewModel(
                 _uiState.update {
                     it.copy(isLoading = false)
                 }
-            } catch (e: Exception){
+            } catch (_: Exception){
                 _uiState.update {
                     it.copy(isLoading = false, message = "Exception")
                 }
