@@ -1,4 +1,4 @@
-package pe.isil.easyvet.features.home.data
+package pe.isil.easyvet.features.home.data.remote
 
 import retrofit2.Response
 import retrofit2.http.GET

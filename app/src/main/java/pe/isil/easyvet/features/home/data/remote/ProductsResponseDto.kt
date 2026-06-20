@@ -1,4 +1,4 @@
-package pe.isil.easyvet.features.home.data
+package pe.isil.easyvet.features.home.data.remote
 
 import com.google.gson.annotations.SerializedName
 

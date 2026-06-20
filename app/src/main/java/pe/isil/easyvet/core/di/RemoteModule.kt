@@ -1,6 +1,6 @@
 package pe.isil.easyvet.core.di
 
-import pe.isil.easyvet.features.home.data.ProductService
+import pe.isil.easyvet.features.home.data.remote.ProductService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

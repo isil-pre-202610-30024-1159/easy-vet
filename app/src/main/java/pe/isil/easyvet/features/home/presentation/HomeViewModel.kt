@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pe.isil.easyvet.core.di.RemoteModule.provideProductService
-import pe.isil.easyvet.features.home.data.ProductRepositoryImpl
+import pe.isil.easyvet.features.home.data.repositories.ProductRepositoryImpl
 import pe.isil.easyvet.features.home.domain.repositories.ProductRepository
 
 class HomeViewModel(

@@ -1,4 +1,4 @@
-package pe.isil.easyvet.features.home.data
+package pe.isil.easyvet.features.home.data.remote
 
 data class ProductDto (
     val id: Int,

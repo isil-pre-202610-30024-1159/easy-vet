@@ -1,5 +1,6 @@
-package pe.isil.easyvet.features.home.data
+package pe.isil.easyvet.features.home.data.repositories
 
+import pe.isil.easyvet.features.home.data.remote.ProductService
 import pe.isil.easyvet.features.home.domain.model.Product
 import pe.isil.easyvet.features.home.domain.repositories.ProductRepository
 
