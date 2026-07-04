@@ -141,7 +141,7 @@ private var _favoriteFilled: ImageVector? = null
 
 
 @Suppress("CheckReturnValue")
-public val homeBorder: ImageVector
+val homeBorder: ImageVector
     get() {
         if (_homeBorder != null) {
             return _homeBorder!!
@@ -164,7 +164,7 @@ public val homeBorder: ImageVector
                         strokeLineCap = StrokeCap.Butt,
                         strokeLineJoin = StrokeJoin.Bevel,
                         strokeLineMiter = 1f,
-                        pathFillType = PathFillType.Companion.NonZero,
+                        pathFillType = PathFillType.NonZero,
                     ) {
                         moveTo(6f, 19f)
                         horizontalLineTo(9f)
@@ -199,7 +199,7 @@ public val homeBorder: ImageVector
 private var _homeBorder: ImageVector? = null
 
 @Suppress("CheckReturnValue")
-public val arrowBack: ImageVector
+val arrowBack: ImageVector
     get() {
         if (_arrowBack != null) {
             return _arrowBack!!
@@ -222,7 +222,7 @@ public val arrowBack: ImageVector
                         strokeLineCap = StrokeCap.Butt,
                         strokeLineJoin = StrokeJoin.Bevel,
                         strokeLineMiter = 1f,
-                        pathFillType = PathFillType.Companion.NonZero,
+                        pathFillType = PathFillType.NonZero,
                     ) {
                         moveTo(7.83f, 13f)
                         lineToRelative(5.6f, 5.6f)

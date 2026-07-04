@@ -38,7 +38,6 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import pe.isil.easyvet.R
 import pe.isil.easyvet.core.ui.icons.arrowBack
-import pe.isil.easyvet.core.ui.icons.favoriteBorder
 import pe.isil.easyvet.core.ui.theme.AppTheme
 import pe.isil.easyvet.features.home.domain.model.Product
 
