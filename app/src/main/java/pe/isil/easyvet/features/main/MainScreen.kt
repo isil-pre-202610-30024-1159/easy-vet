@@ -68,7 +68,9 @@ fun MainScreen() {
 
             composable("product_detail") {
                 selectedProduct?.let { product ->
-                    ProductDetail(product = product)
+                    ProductDetail(product = product) {
+                        navController.popBackStack()
+                    }
                 }
             }
         }

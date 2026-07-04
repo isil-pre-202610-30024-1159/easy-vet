@@ -37,13 +37,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import pe.isil.easyvet.R
+import pe.isil.easyvet.core.ui.icons.arrowBack
 import pe.isil.easyvet.core.ui.icons.favoriteBorder
 import pe.isil.easyvet.core.ui.theme.AppTheme
 import pe.isil.easyvet.features.home.domain.model.Product
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProductDetail(product: Product) {
+fun ProductDetail(product: Product,
+    onBack: () -> Unit
+) {
 
     var showBottomSheet by remember { mutableStateOf(false) }
 
@@ -61,10 +64,10 @@ fun ProductDetail(product: Product) {
                 title = {},
                 navigationIcon = {
                     IconButton(
-                        onClick = {  }
+                        onClick = onBack
                     ) {
                         Icon(
-                            favoriteBorder,
+                            arrowBack,
                             contentDescription = "Back"
                         )
                     }
@@ -231,6 +234,8 @@ fun ProductDetailPreview() {
                 price = 49.99,
                 isFavorite = false
             )
-        )
+        ) {
+
+        }
     }
 }
